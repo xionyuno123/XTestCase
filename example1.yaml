@@ -1,1 +1,52 @@
-example1.yaml
+# 大三巴的页面作为测试 demo
+
+case1: &case1
+  name: "fibonacci" # 步骤名称
+  target: cppdriver
+  abort_when_failed: true # 单有 case 失败的时候中断后续的步骤执行
+  # 执行操作
+  operations:
+    - 
+      run: "init_xmit_core"
+      params: 
+        - "4"
+      expect: "0" 
+      timeout: 1000
+    - 
+      run: "start_server"
+      timeout: 1000
+      expect: "0"
+    - 
+      run: "start_client"
+      timeout: 1000
+      expect: "0"
+    - 
+      run: "start"
+      timeout: 1000
+      expect: "0" 
+    -
+      run: "get_fibonacci_num"
+      params: 
+        - "1"
+      timeout: 1000
+      expect: "0"
+    -
+      run: "get_fibonacci_num"
+      params: 
+        - "5"
+      timeout: 1000
+      expect: "3"
+    -
+      run: "get_fibonacci_num"
+      params: 
+        - "6"
+      timeout: 1000
+      expect: "5"
+    - 
+      run: "close"
+      timeout: 1000
+      expect: "0"
+
+
+cases: # 用例正式执行
+  - <<: *case1
